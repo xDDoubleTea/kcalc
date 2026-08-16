@@ -36,7 +36,7 @@
 	}                                                               \
 	static inline void NAME##_stack_free(NAME##Stack *s)            \
 	{                                                               \
-		free(s->data);                                          \
+		kfree(s->data);                                         \
 	}                                                               \
 	static inline int NAME##_stack_empty(NAME##Stack *s)            \
 	{                                                               \
