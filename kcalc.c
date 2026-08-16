@@ -140,13 +140,12 @@ void print_tokens_debug(const Token *token_arr, const int token_len)
 				 t.num);
 			break;
 		case TOKEN_OPERATOR:
-			pr_debug("Token #%d: (type, val) = (opeator, '%c')", i,
+			pr_debug("Token #%d: (type, val) = (operator, '%c')", i,
 				 t.op);
 			break;
 		case TOKEN_PAREN:
-			pr_debug(
-				"Token #%d: (type, val) = (paraenthesis, '%c')",
-				i, t.op);
+			pr_debug("Token #%d: (type, val) = (parenthesis, '%c')",
+				 i, t.op);
 			break;
 		case TOKEN_UNARY_MINUS:
 			pr_debug("Token #%d: (type, val) = (unary_minus, '%c')",
