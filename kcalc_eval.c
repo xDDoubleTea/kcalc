@@ -113,16 +113,14 @@ int eval(Token *postfix, int len, long *result)
 		if (rc != 0)
 			goto err_inval;
 	}
-	if (Token_stack_empty(&st) || Token_stack_size(&st) > 1)
+	if (Token_stack_empty(&st) || Token_stack_size(&st) > 1) {
+		rc = -EINVAL;
 		goto err_inval;
+	}
 
 	*result = Token_stack_top(&st)->num;
-	Token_stack_free(&st);
-	return 0;
-
 err_inval:
 err_alloc:
-	*result = 0;
-	kfree(token_stack_arr);
+	Token_stack_free(&st);
 	return rc;
 }
