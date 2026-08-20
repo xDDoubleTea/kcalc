@@ -22,4 +22,7 @@ int shunting_yard(const Token *infix, const int token_len, int paren_count,
 int eval(Token *postfix, int len, long *result);
 void print_tokens_debug(const Token *token_arr, const int token_len);
 
+int kcalc_chardev_init(void);
+void kcalc_chardev_exit(void);
+
 #endif /* KCALC_H */

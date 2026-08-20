@@ -14,7 +14,7 @@
 #include "kcalc.h"
 
 MODULE_LICENSE("GPL");
-MODULE_AUTHOR("AMOGUS");
+MODULE_AUTHOR("404");
 MODULE_DESCRIPTION("A calculator that runs directly in the kernel.");
 
 static char *expr = "+";
@@ -24,47 +24,14 @@ module_param(expr, charp, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
 
 static int __init kcalc_init(void)
 {
-	int rc = 0;
-	int expr_len = 0;
-	int token_len = 0, paren_count = 0;
-	int postfix_len = 0;
-	long ans = 0;
-	Token *tokens = NULL, *postfix = NULL;
-
-	pr_info("kcalc is loaded successfully.");
-	pr_debug("Expression = %s", expr);
-	expr_len = strlen(expr);
-
-	if ((rc = tokenize(expr, expr_len, &token_len, &paren_count,
-			   &tokens)) != 0)
-		goto err_tokenize;
-
-	pr_debug("(token_len, paren_count) = (%d, %d)", token_len, paren_count);
-	print_tokens_debug(tokens, token_len);
-
-	if ((rc = shunting_yard(tokens, token_len, paren_count, &postfix_len,
-				&postfix)) != 0)
-		goto err_shunting_yard;
-
-	pr_debug("postfix_len = %d", postfix_len);
-	print_tokens_debug(postfix, postfix_len);
-
-	if ((rc = eval(postfix, postfix_len, &ans)) != 0)
-		goto err_eval;
-
-	pr_info("Result = %ld", ans);
-
-err_eval:
-err_shunting_yard:
-	kfree(postfix);
-err_tokenize:
-	kfree(tokens);
-	return rc;
+	pr_info("kcalc is loading...\n");
+	return kcalc_chardev_init();
 }
 
 static void __exit kcalc_exit(void)
 {
-	pr_info("kcalc is unloaded successfully.");
+	kcalc_chardev_exit();
+	pr_info("kcalc is unloaded successfully.\n");
 }
 
 module_init(kcalc_init);
