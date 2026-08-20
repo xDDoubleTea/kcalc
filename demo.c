@@ -8,9 +8,7 @@
 #define DEVICE_PATH "/dev/kcalc_chardev"
 #define READ_BUF_SIZE 64
 
-extern int errno;
-
-int main()
+int main(void)
 {
 	int fd;
 	int exit_code = 0;
@@ -25,6 +23,7 @@ int main()
 	}
 
 	fputs("kcalc>>>", stdout);
+	fflush(stdout);
 	while ((nread = getline(&line, &buf_size, stdin)) != -1) {
 		char read_buf[READ_BUF_SIZE];
 		if (nread > 0 && line[nread - 1] == '\n') {
@@ -55,6 +54,7 @@ int main()
 		exit_code = 0;
 prompt:
 		fputs("kcalc>>>", stdout);
+		fflush(stdout);
 	}
 	free(line);
 	close(fd);

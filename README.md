@@ -8,6 +8,10 @@ Originally a from-scratch userspace C port of a
 [shunting-yard implementation](https://github.com/xDDoubleTea/shuntingyard),
 ported into a loadable kernel module.
 
+## Demo
+
+![Demo](./assets/demo.mp4)
+
 ## Features
 
 - Standard arithmetic: `+ - * / % ^`, parentheses, unary `+`/`-`.
@@ -86,15 +90,15 @@ Then start typing expressions, send EOF to exit.
 
 ## Architecture
 
-| File                     | Responsibility                                      |
-|---------------------------|-----------------------------------------------------|
-| `kcalc.h`                 | Shared `Token`/`token_t` types, public prototypes    |
-| `kcalc_stack.h`            | Generic stack macro (`DEFINE_STACK`)                |
-| `kcalc_tokenize.c`         | Lexes an expression string into a `Token` array      |
-| `kcalc_shunting_yard.c`    | Infix → postfix via the shunting-yard algorithm      |
-| `kcalc_eval.c`             | Evaluates a postfix `Token` array, with overflow checks |
-| `kcalc_chardev.c`          | `/dev/kcalc_chardev` — wires the above into `read`/`write` |
-| `kcalc_main.c`             | Module init/exit, wiring `kcalc_chardev_init/exit`   |
+| File                    | Responsibility                                             |
+| ----------------------- | ---------------------------------------------------------- |
+| `kcalc.h`               | Shared `Token`/`token_t` types, public prototypes          |
+| `kcalc_stack.h`         | Generic stack macro (`DEFINE_STACK`)                       |
+| `kcalc_tokenize.c`      | Lexes an expression string into a `Token` array            |
+| `kcalc_shunting_yard.c` | Infix → postfix via the shunting-yard algorithm            |
+| `kcalc_eval.c`          | Evaluates a postfix `Token` array, with overflow checks    |
+| `kcalc_chardev.c`       | `/dev/kcalc_chardev` — wires the above into `read`/`write` |
+| `kcalc_main.c`          | Module init/exit, wiring `kcalc_chardev_init/exit`         |
 
 Error handling convention throughout: functions return an `int` status
 code (`0` on success, negative errno otherwise); results are written
