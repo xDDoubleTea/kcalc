@@ -24,6 +24,7 @@ int main()
 		return 1;
 	}
 
+	fputs("kcalc>>>", stdout);
 	while ((nread = getline(&line, &buf_size, stdin)) != -1) {
 		char read_buf[READ_BUF_SIZE];
 		if (nread > 0 && line[nread - 1] == '\n') {
@@ -50,6 +51,7 @@ int main()
 		// r is the length of the read string
 		read_buf[r] = '\0';
 		fputs(read_buf, stdout);
+		fputs("kcalc>>>", stdout);
 	}
 	free(line);
 	close(fd);

@@ -61,6 +61,20 @@ sudo cat /dev/kcalc_chardev
 # 307
 ```
 
+> Notes:
+>
+> - Use `printf '%s'`, not plain `echo`, to avoid sending a trailing
+>   newline — the tokenizer rejects unrecognized characters, including
+>   `\n`.
+> - `tee` echoes its stdin to your terminal in addition to writing the
+>   device; redirect to `/dev/null` if you only want the device write.
+> - The device node is root-only by default (`crw-------`); commands
+>   above assume `sudo`.
+> - On failure, `write()` returns a negative errno and no result is
+>   stored (e.g. malformed expression → `-EINVAL`, "Invalid argument";
+>   arithmetic overflow → `-EOVERFLOW`, "Value too large for defined
+>   data type").
+
 You can also compile and execute the provided `demo.c`
 
 ```sh
@@ -68,19 +82,7 @@ gcc -Wall -Wextra -o demo.out demo.c
 sudo ./demo.out
 ```
 
-Notes:
-
-- Use `printf '%s'`, not plain `echo`, to avoid sending a trailing
-  newline — the tokenizer rejects unrecognized characters, including
-  `\n`.
-- `tee` echoes its stdin to your terminal in addition to writing the
-  device; redirect to `/dev/null` if you only want the device write.
-- The device node is root-only by default (`crw-------`); commands
-  above assume `sudo`.
-- On failure, `write()` returns a negative errno and no result is
-  stored (e.g. malformed expression → `-EINVAL`, "Invalid argument";
-  arithmetic overflow → `-EOVERFLOW`, "Value too large for defined
-  data type").
+Then start typing expressions, send EOF to exit.
 
 ## Architecture
 
