@@ -61,6 +61,13 @@ sudo cat /dev/kcalc_chardev
 # 307
 ```
 
+You can also compile and execute the provided `demo.c`
+
+```sh
+gcc -Wall -Wextra -o demo.out demo.c
+sudo ./demo.out
+```
+
 Notes:
 
 - Use `printf '%s'`, not plain `echo`, to avoid sending a trailing
