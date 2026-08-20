@@ -128,7 +128,7 @@ errors, explaining kernel APIs and conventions, and as a learning aid —
 all algorithm design, kernel module architecture decisions, and testing
 strategy are my own.
 
-## Reference
+## References
 
 [The Linux Kernel Module Programming Guide](https://sysprog21.github.io/lkmpg/)
 
