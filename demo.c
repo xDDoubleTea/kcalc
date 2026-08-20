@@ -32,25 +32,28 @@ int main()
 			nread--;
 		}
 		if (nread == 0)
-			continue;
+			goto prompt;
 
 		ssize_t written = write(fd, line, (size_t)nread);
 		if (written < 0) {
 			fprintf(stderr, "kcalc: %s: %s\n", line,
 				strerror(errno));
 			exit_code = 1;
-			continue;
+			goto prompt;
 		}
 
 		ssize_t r = read(fd, read_buf, sizeof(read_buf) - 1);
 		if (r < 0) {
 			perror("read " DEVICE_PATH);
 			exit_code = 1;
-			continue;
+			goto prompt;
 		}
 		// r is the length of the read string
 		read_buf[r] = '\0';
+
 		fputs(read_buf, stdout);
+		exit_code = 0;
+prompt:
 		fputs("kcalc>>>", stdout);
 	}
 	free(line);
