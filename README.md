@@ -10,7 +10,7 @@ ported into a loadable kernel module.
 
 ## Demo
 
-![Demo](./assets/demo.mp4)
+![Demo](assets/demo.gif)
 
 ## Features
 
