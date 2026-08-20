@@ -131,4 +131,5 @@ strategy are my own.
 ## Reference
 
 [The Linux Kernel Module Programming Guide](https://sysprog21.github.io/lkmpg/)
+
 [sysprog21/lkmpg: The Linux Kernel Module Programming Guide (updated for 5.0+ kernels)](https://github.com/sysprog21/lkmpg)
