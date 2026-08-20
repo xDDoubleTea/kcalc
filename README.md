@@ -127,3 +127,8 @@ was used throughout development for code review, debugging build/runtime
 errors, explaining kernel APIs and conventions, and as a learning aid —
 all algorithm design, kernel module architecture decisions, and testing
 strategy are my own.
+
+## Reference
+
+[The Linux Kernel Module Programming Guide](https://sysprog21.github.io/lkmpg/)
+[sysprog21/lkmpg: The Linux Kernel Module Programming Guide (updated for 5.0+ kernels)](https://github.com/sysprog21/lkmpg)
