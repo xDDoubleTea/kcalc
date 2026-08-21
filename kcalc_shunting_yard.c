@@ -27,9 +27,9 @@ static inline int precedence(char op, int is_unary)
 static inline int precedence_comp(Token t, Token top, int t_is_unary,
 				  int t_is_right_assoc)
 {
-	int top_is_unary = top.type == TOKEN_UNARY_MINUS ||
-			   top.type == TOKEN_UNARY_PLUS;
-	return precedence(t.op, top_is_unary) + t_is_right_assoc <=
+	int top_is_unary = ((top.type == TOKEN_UNARY_MINUS) ||
+			    (top.type == TOKEN_UNARY_PLUS));
+	return precedence(t.op, t_is_unary) + t_is_right_assoc <=
 	       precedence(top.op, top_is_unary);
 }
 
@@ -44,8 +44,8 @@ static inline int handle_operand(Token t, Token *postfix, int *postfix_ptr,
 static inline int handle_operator(Token t, TokenStack *st, Token *postfix,
 				  int *postfix_ptr, int *expect_opnd)
 {
-	int cur_uny = *expect_opnd && (t.op == '+' || t.op == '-');
-	int is_r_assoc = t.op == '^' || cur_uny;
+	int cur_uny = ((*expect_opnd == 1) && (t.op == '+' || t.op == '-'));
+	int is_r_assoc = ((t.op == '^') || cur_uny);
 	Token *top;
 
 	if (cur_uny)
